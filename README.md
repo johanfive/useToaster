@@ -7,7 +7,7 @@ Calling the function adds a toast in the Toaster :)
 
 ### Usage
 ```js
-import useToaster from 'useToaster';
+import useToaster from 'usetoaster';
 
 const YourComponent = props => {
   const [ Toaster, toast ] = useToaster();
