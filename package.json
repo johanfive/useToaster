@@ -1,6 +1,6 @@
 {
   "name": "usetoaster",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "useToaster is a React Hook for easily creating and managing Toasts.",
   "main": "dist/index.js",
   "files": [
