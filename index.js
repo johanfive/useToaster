@@ -22,20 +22,29 @@ const toastReducer = (state, action) => {
   }
 };
 
-const Toast = ({ content, dispatch, id, delay }) => {
+const Toast = ({ content, dispatch, id, delay, className, padding }) => {
+  const style = { padding };
   const remove = () => dispatch({ type: 'remove', id });
   useEffect(() => {
     setTimeout(remove, delay);
   });
-  return <div onClick={remove}>{content}</div>;
+  return <div onClick={remove} className={className} style={style}>{content}</div>;
 };
 
 export default () => {
   const [toasts, dispatch] = useReducer(toastReducer, []);
   return [
-    ({ delay, style, className }) => <div style={style} className={className}>
+    ({ delay, style, className, toastClass, toastPadding }) => <div style={style} className={className}>
       {toasts.map(({id, content}) =>
-        <Toast content={content} dispatch={dispatch} delay={delay || 15000} key={id} id={id} />
+        <Toast
+          content={content}
+          dispatch={dispatch}
+          delay={delay || 15000}
+          key={id}
+          id={id}
+          className={toastClass}
+          padding={toastPadding}
+        />
       )}
     </div>,
     content => dispatch({ type: 'add', content })

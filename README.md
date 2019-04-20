@@ -47,12 +47,19 @@ Style the Toaster like you would any other React component. It is not styled by 
 ```
 
 ### The Toasts
-Because the content of a Toast can be `anything`, you can style it however you want.
-
-Just know that your content will be wrapped in a div, so style accordingly.
+You can pass a class that will be applied to all Toasts in the Toaster
 ```js
+<Toaster toastClass="toasts" />
+// and then simply
 toast('Plain text');
 ```
+
+Alternatively, because the content of a Toast can be `anything`, you can style it however you want:
 ```js
 toast(<AnyStyledComponent text="Some text" />);
+```
+If you are doing this, understand that your custom component will be wrapped in a div.
+In this case, if you want control over the padding of each Toast, declare it like so:
+```js
+<Toaster toastPadding="5px 0" />
 ```
