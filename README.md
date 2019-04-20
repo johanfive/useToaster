@@ -59,7 +59,7 @@ Alternatively, because the content of a Toast can be `anything`, you can style i
 toast(<AnyStyledComponent text="Some text" />);
 ```
 If you are doing this, understand that your custom component will be wrapped in a div.
-In this case, if you want control over the padding of each Toast, declare it like so:
+In this case, if you want control over the margin of each Toast, declare it like so:
 ```js
-<Toaster toastPadding="5px 0" />
+<Toaster toastMargin="5px 0" />
 ```

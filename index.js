@@ -22,8 +22,8 @@ const toastReducer = (state, action) => {
   }
 };
 
-const Toast = ({ content, dispatch, id, delay, className, padding }) => {
-  const style = { padding };
+const Toast = ({ content, dispatch, id, delay, className, margin }) => {
+  const style = { margin };
   const remove = () => dispatch({ type: 'remove', id });
   useEffect(() => {
     setTimeout(remove, delay);
@@ -34,7 +34,7 @@ const Toast = ({ content, dispatch, id, delay, className, padding }) => {
 export default () => {
   const [toasts, dispatch] = useReducer(toastReducer, []);
   return [
-    ({ delay, style, className, toastClass, toastPadding }) => <div style={style} className={className}>
+    ({ delay, style, className, toastClass, toastMargin }) => <div style={style} className={className}>
       {toasts.map(({id, content}) =>
         <Toast
           content={content}
@@ -43,7 +43,7 @@ export default () => {
           key={id}
           id={id}
           className={toastClass}
-          padding={toastPadding}
+          margin={toastMargin}
         />
       )}
     </div>,
