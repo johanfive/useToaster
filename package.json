@@ -1,0 +1,43 @@
+{
+  "name": "usetoaster",
+  "version": "1.0.0",
+  "description": "useToaster is a React Hook for easily creating and managing Toasts.",
+  "main": "dist/index.js",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "test": "test",
+    "transpile": "babel index.js -d dist",
+    "prepublishOnly": "npm run transpile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johanfive/useToaster.git"
+  },
+  "keywords": [
+    "Toaster",
+    "Toasts",
+    "Toast",
+    "React",
+    "Hook",
+    "Hooks",
+    "useToast",
+    "useToaster"
+  ],
+  "author": "johanFive",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johanfive/useToaster/issues"
+  },
+  "homepage": "https://github.com/johanfive/useToaster#readme",
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0"
+  }
+}
