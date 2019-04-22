@@ -1,15 +1,12 @@
-import React, { useReducer, useEffect } from 'react';
-
-let uid = 0;
+import React, { useReducer } from 'react';
 
 const toastReducer = (state, action) => {
   switch (action.type) {
     case 'add':
-      uid += 1;
       return [
         ...state,
         {
-          id: uid,
+          id: action.id,
           content: action.content
         }
       ];
@@ -22,31 +19,54 @@ const toastReducer = (state, action) => {
   }
 };
 
-const Toast = ({ content, dispatch, id, delay, className, margin }) => {
-  const style = { margin };
-  const remove = () => dispatch({ type: 'remove', id });
-  useEffect(() => {
-    setTimeout(remove, delay);
-  });
-  return <div onClick={remove} className={className} style={style}>{content}</div>;
+const timers = {};
+const startTimer = (id, removeToast, delay) => {
+  if (!timers[id]) {
+    timers[id] = setTimeout(() => removeToast(id), delay);
+  }
+};
+const dismiss = (id, removeToast) => {
+  if (timers[id]) {
+    clearTimeout(timers[id]);
+    delete timers[id];
+  }
+  removeToast(id);
 };
 
-export default () => {
-  const [toasts, dispatch] = useReducer(toastReducer, []);
-  return [
-    ({ delay, style, className, toastClass, toastMargin }) => <div style={style} className={className}>
-      {toasts.map(({id, content}) =>
-        <Toast
-          content={content}
-          dispatch={dispatch}
-          delay={delay || 15000}
-          key={id}
-          id={id}
-          className={toastClass}
-          margin={toastMargin}
-        />
+let uid = 0;
+
+export default delay => {
+  const [toastList, dispatch] = useReducer(toastReducer, []);
+  const removeToast = id => dispatch({ type: 'remove', id });
+
+  const addToast = content => {
+    uid += 1;
+    startTimer(uid, removeToast, delay || 15000);
+    dispatch({ type: 'add', id: uid, content });
+  };
+
+  const Toaster = ({ style, className, toastClass, toastMargin }) => (
+    <div style={style} className={className}>
+      {toastList.map(({id, content}) => {
+        const remove = () => dismiss(id, removeToast);
+        return (
+          <div
+            key={id}
+            style={{ margin: toastMargin }}
+            className={toastClass}
+            onClick={remove}
+          >
+            {content}
+          </div>
+          );
+        }
       )}
-    </div>,
-    content => dispatch({ type: 'add', content })
+    </div>
+  );
+
+  return [
+    Toaster,
+    addToast,
+    toastList
   ];
 };

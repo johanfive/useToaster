@@ -1,21 +1,22 @@
 # useToaster 🍞
+## v2
 
-The `useToaster` React Hook gives you a `Toaster` component, and a simple `toast` function.
+The `useToaster` React Hook gives you a `Toaster` component, a simple `addToast` function, and a `toastList` (a list of toasts).
 
-Calling the function adds a toast in the Toaster :)
->It's as simple as that and there is no need for the context API or anything...
+Calling the function adds a toast to the toasts list, which is rendered in the Toaster.
+> It's as simple as that and there is no need for the context API or anything...
 
 ### Usage
 ```js
 import useToaster from 'usetoaster';
 
 const YourComponent = props => {
-  const [ Toaster, toast ] = useToaster();
+  const [ Toaster, addToast, toasts ] = useToaster();
   return (
     <>
       <Toaster />
       <h1>Example</h1>
-      <button onClick={() => toast('Champagne!')}>Toast</button>
+      <button onClick={() => addToast('Champagne!')}>Toast</button>
     </>
   );
 };
@@ -26,11 +27,7 @@ By default, the Toasts will disappear by themselves after 15s.
 
 You can control this by specifying a `delay`:
 ```js
-<Toaster delay={5000} />
-```
-or
-```js
-<Toaster delay="5000" />
+const [ Toaster, addToast, toasts ] = useToaster(5000);
 ```
 
 Note: Clicking a Toast that appears in the Toaster will make it disappear instantly regardless of the delay.
