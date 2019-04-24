@@ -7,7 +7,8 @@ const toastReducer = (state, action) => {
         ...state,
         {
           id: action.id,
-          content: action.content
+          content: action.content,
+          metadata: action.metadata
         }
       ];
 
@@ -39,10 +40,10 @@ export default delay => {
   const [toastList, dispatch] = useReducer(toastReducer, []);
   const removeToast = id => dispatch({ type: 'remove', id });
 
-  const addToast = content => {
+  const addToast = (content, metadata) => {
     uid += 1;
     startTimer(uid, removeToast, delay || 15000);
-    dispatch({ type: 'add', id: uid, content });
+    dispatch({ type: 'add', id: uid, content, metadata });
   };
 
   const Toaster = ({ style, className, toastClass, toastMargin }) => (
