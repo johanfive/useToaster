@@ -9,7 +9,8 @@
   "scripts": {
     "test": "test",
     "transpile": "babel index.js -d dist",
-    "prepublishOnly": "npm run transpile"
+    "prepublishOnly": "npm run transpile",
+    "localBar": "rm -rf ~/usetoaster-2.0.0.tgz && ls ~ && npm run transpile && npm pack && cp usetoaster-2.0.0.tgz ~ && ls ~"
   },
   "repository": {
     "type": "git",
